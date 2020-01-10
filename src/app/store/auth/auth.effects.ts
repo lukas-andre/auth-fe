@@ -40,14 +40,20 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap((user) => {
-      localStorage.setItem('token', user.token);
+    map((action: LogInSuccess) => action.payload),
+    tap((payload) => {
+      console.log('payload', payload);
+      localStorage.setItem('token', payload.token);
       this.router.navigateByUrl('/');
     })
   );
 
   @Effect({ dispatch: false })
   LogInFailure: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_FAILURE)
+    ofType(AuthActionTypes.LOGIN_FAILURE),
+    map((action: LogInFailure) => action.payload),
+    tap((payload) => {
+      console.log('login failure payload', payload)
+    })
   );
 }
