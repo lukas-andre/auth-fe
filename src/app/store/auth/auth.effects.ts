@@ -4,9 +4,11 @@ import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { tap, map, switchMap, catchError, retry } from 'rxjs/operators';
-import 'rxjs/add/observable/of';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AuthActionTypes, LogIn } from '../user/user.actions';
+import {
+  AuthActionTypes,
+  LogIn, LogInSuccess, LogInFailure
+ } from '../user/user.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -17,7 +19,7 @@ export class AuthEffects {
     private router: Router
   ) { }
 
-
+  @Effect()
   LogIn: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN),
     map((action: LogIn) => action.payload),
@@ -33,6 +35,19 @@ export class AuthEffects {
         })
       );
     })
+  );
 
+  @Effect({ dispatch: false })
+  LogInSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_SUCCESS),
+    tap((user) => {
+      localStorage.setItem('token', user.token);
+      this.router.navigateByUrl('/');
+    })
+  );
+
+  @Effect({ dispatch: false })
+  LogInFailure: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_FAILURE)
   );
 }
