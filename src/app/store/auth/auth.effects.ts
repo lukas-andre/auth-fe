@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { tap, map, switchMap, catchError, retry } from 'rxjs/operators';
+import { tap, map, switchMap, catchError, retry, delay } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import {
   AuthActionTypes,
@@ -22,6 +22,7 @@ export class AuthEffects {
   @Effect()
   LogIn: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN),
+    delay(500),
     map((action: LogIn) => action.payload),
     switchMap(payload => {
       return this.authService.logIn(payload.username, payload.password).pipe(

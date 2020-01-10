@@ -5,7 +5,7 @@
                 <mat-card-title>Login</mat-card-title>
                 <mat-card-subtitle>Redux Login Example</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content >
             <div fxFill>
                 <form [formGroup]="form" fxFlex fxLayout="column" 
                     id="ngForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
@@ -26,8 +26,11 @@
                 </form>
             </div>
             </mat-card-content>
-            <mat-card-actions fxLayoutAlign="center center">
-                <button mat-raised-button color="primary" form="ngForm" [disabled]=!loginForm.form.valid>Login</button>
+            <mat-card-actions fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout="row">
+                <button *ngIf="(isLoading | async) === false" mat-raised-button color="primary" form="ngForm" [disabled]=!loginForm.form.valid>Login</button>
+                <div *ngIf="(isLoading | async) === true">
+                    <mat-spinner diameter="25"></mat-spinner>
+                </div>
             </mat-card-actions>
         </mat-card>
         

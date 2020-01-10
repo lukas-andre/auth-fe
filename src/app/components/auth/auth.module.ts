@@ -8,7 +8,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AUTH_ROUTES } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule, MatButtonModule, MatInputModule } from '@angular/material'; 
+import { MatCardModule, MatButtonModule, MatInputModule, MatProgressBarModule, MatProgressSpinnerModule } from '@angular/material';
 @NgModule({
   declarations: [AuthComponent, LoginComponent, RegisterComponent, ForgotPasswordComponent, ResetPasswordComponent],
   imports: [
@@ -16,6 +16,8 @@ import { MatCardModule, MatButtonModule, MatInputModule } from '@angular/materia
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule,
     CommonModule,
     AUTH_ROUTES,
