@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private baseUrl: string = environment.BASE_URL;
+  private endPointUrl = this.baseUrl + '/auth';
 
   constructor(private http: HttpClient) { }
 
@@ -17,12 +18,17 @@ export class AuthService {
   }
 
   logIn(username: string, password: string): Observable<any> {
-    const url = `${this.baseUrl}/login`;
-    return this.http.post(url, { username, password });
+    const url = `${this.endPointUrl}/login`;
+    return this.http.post(url, {
+      data: {
+        username,
+        password
+      }
+    });
   }
 
   register(username: string, email: string, password: string): Observable<any> {
-    const url = `${this.baseUrl}/register`;
+    const url = `${this.endPointUrl}/register`;
     return this.http.post(url, { username, email, password });
   }
 
