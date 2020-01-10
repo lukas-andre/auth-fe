@@ -15,6 +15,8 @@ export const initialState: State = {
 }
 
 export function reducer(state = initialState, action: All): State {
+    console.log('state:', initialState);
+    console.log('action:', action);
     switch (action.type) {
         case AuthActionTypes.LOGIN_SUCCESS: {
             return {
@@ -31,7 +33,7 @@ export function reducer(state = initialState, action: All): State {
             return {
                 ...state,
                 errorMessage: 'Incorrect username or password'
-            }
+            };
         }
         default: {
             return state;

@@ -30,10 +30,12 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
+
   onSubmit() {
+    console.log('form', this.form);
     const payload = {
-      username: this.user.username,
-      password: this.user.password
+      username: this.form.value.username,
+      password: this.form.value.password
     };
     this.store.dispatch(new LogIn(payload));
   }
