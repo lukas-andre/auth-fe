@@ -1,13 +1,14 @@
 <div fxFlex>
     <div fxLayout="row" fxLayout.xs="column" fxFill fxLayoutAlign="center center" fxLayoutGap="10px">
-        <mat-card class="card">
+        <mat-card class="card" fxFlex.xs="30">
             <mat-card-header>
                 <mat-card-title>Login</mat-card-title>
                 <mat-card-subtitle>Redux Login Example</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
             <div fxFill>
-                <form [formGroup]="form" fxFlex fxLayout="column">
+                <form [formGroup]="form" fxFlex fxLayout="column" 
+                    id="ngForm" #loginForm="ngForm" (ngSubmit)="onSubmit()">
                     <mat-form-field appearance="outline" fxFlex="50">
                         <mat-label>Username</mat-label>
                         <input matInput formControlName="username" type="text" >
@@ -15,7 +16,7 @@
                             Username is required
                         </mat-error>
                       </mat-form-field>
-                      <mat-form-field appearance="outline" fxFlex="50">
+                      <mat-form-field appearance="outline" fxFlex="50" >
                         <mat-label>Password</mat-label>
                         <input matInput formControlName="password" type="password" >
                         <mat-error *ngIf="form.controls['password'].hasError('required')">
@@ -26,7 +27,7 @@
             </div>
             </mat-card-content>
             <mat-card-actions fxLayoutAlign="center center">
-                <button mat-raised-button color="primary">Login</button>
+                <button mat-raised-button color="primary" form="ngForm" [disabled]=!loginForm.form.valid>Login</button>
             </mat-card-actions>
         </mat-card>
         
